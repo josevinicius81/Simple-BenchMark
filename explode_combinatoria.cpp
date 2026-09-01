@@ -42,8 +42,8 @@ unsigned long long rodar_benchmark_combinacoes(int n, int k) {
 }
 
 int main() {
-    int n = 36; 
-    int k = 18; 
+    int n = 32; 
+    int k = 16; 
     
     cout << "=== INICIANDO BENCHMARK DE COMBINATORIA ===" << endl;
     cout << "Gerando combinacoes para N = " << n << " e K = " << k << endl;
@@ -52,16 +52,12 @@ int main() {
     cout << "Total de combinacoes a processar: " << total_esperado << endl;
     cout << "Processando na CPU, por favor aguarde..." << endl;
 
-    // Marca o tempo de início
     auto inicio = chrono::high_resolution_clock::now();
 
-    // Executa a carga pesada
     unsigned long long total_calculado = rodar_benchmark_combinacoes(n, k);
 
-    // Marca o tempo de término
     auto fim = chrono::high_resolution_clock::now();
 
-    // Calcula a diferença de tempo em milissegundos
     auto duracao = chrono::duration_cast<chrono::milliseconds>(fim - inicio).count();
 
     cout << "\n=== RESULTADOSDO BENCHMARK ===" << endl;
