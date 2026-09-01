@@ -42,9 +42,15 @@ int recursaocaminhos(int i, int j, int linhas, int colunas, const vector<vector<
 int main() {
     int linhas = 7;
     int colunas = 6;
+<<<<<<< HEAD
     int numero_exec = 7;
 
     for (int i = 1; i <= numero_exec; ++i){
+=======
+    int n_execucoes = 7;
+
+    for (int i = 1; i <= n_execucoes; i++){
+>>>>>>> 8211c2ba5a5282d540eb9877aee9d5207819ae8c
         vector<vector<int>> matriz(linhas, vector<int>(colunas, 0));
         vector<vector<int>> matrizcheck(linhas, vector<int>(colunas, false));
 
@@ -59,12 +65,19 @@ int main() {
 
         auto duracao_ms = chrono::duration_cast<chrono::milliseconds>(fim - inicio).count();
         chrono::duration<double> duracao_s = fim - inicio;
+<<<<<<< HEAD
 
         cout << "===Resultado do Benchmark===" << endl;
         cout << "A quantidade de caminhos encontrados foi: " << caminhos << endl;
         cout << "Tempo de execucao: " << duracao_ms << " ms (" << duracao_s.count() << " segundos)" << endl;
         
     }
+=======
+>>>>>>> 8211c2ba5a5282d540eb9877aee9d5207819ae8c
 
+        cout << "===Resultado do Benchmark===" << endl;
+        cout << "A quantidade de caminhos encontrados foi: " << caminhos << endl;
+        cout << "Tempo de execucao: " << duracao_ms << " ms (" << duracao_s.count() << " segundos)" << endl;
+    }
     return 0;
 }
