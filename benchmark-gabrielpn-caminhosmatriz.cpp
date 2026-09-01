@@ -42,25 +42,29 @@ int recursaocaminhos(int i, int j, int linhas, int colunas, const vector<vector<
 int main() {
     int linhas = 7;
     int colunas = 6;
-    
-    vector<vector<int>> matriz(linhas, vector<int>(colunas, 0));
-    vector<vector<int>> matrizcheck(linhas, vector<int>(colunas, false));
+    int numero_exec = 7;
 
-    vector<pair<int, int>> caminho_atual;
-    vector<vector<pair<int, int>>> todos_caminhos;
+    for (int i = 1; i <= numero_exec; ++i){
+        vector<vector<int>> matriz(linhas, vector<int>(colunas, 0));
+        vector<vector<int>> matrizcheck(linhas, vector<int>(colunas, false));
 
-    auto inicio = chrono::high_resolution_clock::now();
+        vector<pair<int, int>> caminho_atual;
+        vector<vector<pair<int, int>>> todos_caminhos;
 
-    int caminhos = recursaocaminhos(0, 0, linhas, colunas, matriz, matrizcheck, caminho_atual, todos_caminhos);
+        auto inicio = chrono::high_resolution_clock::now();
 
-    auto fim = chrono::high_resolution_clock::now();
+        int caminhos = recursaocaminhos(0, 0, linhas, colunas, matriz, matrizcheck, caminho_atual, todos_caminhos);
 
-    auto duracao_ms = chrono::duration_cast<chrono::milliseconds>(fim - inicio).count();
-    chrono::duration<double> duracao_s = fim - inicio;
+        auto fim = chrono::high_resolution_clock::now();
 
-    cout << "===Resultado do Benchmark===" << endl;
-    cout << "A quantidade de caminhos encontrados foi: " << caminhos << endl;
-    cout << "Tempo de execucao: " << duracao_ms << " ms (" << duracao_s.count() << " segundos)" << endl;
+        auto duracao_ms = chrono::duration_cast<chrono::milliseconds>(fim - inicio).count();
+        chrono::duration<double> duracao_s = fim - inicio;
+
+        cout << "===Resultado do Benchmark===" << endl;
+        cout << "A quantidade de caminhos encontrados foi: " << caminhos << endl;
+        cout << "Tempo de execucao: " << duracao_ms << " ms (" << duracao_s.count() << " segundos)" << endl;
+        
+    }
 
     return 0;
 }
