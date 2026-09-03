@@ -65,6 +65,5 @@ int main() {
     cout << "===Resultado do Benchmark===" << endl;
     cout << "A quantidade de caminhos encontrados foi: " << caminhos << endl;
     cout << "Tempo de execucao: " << duracao_ms << " ms (" << duracao_s.count() << " segundos)" << endl;
-
     return 0;
 }
