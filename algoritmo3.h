@@ -1,36 +1,62 @@
 #ifndef ALGORITMO_3
 #define ALGORITMO_3
 
-//Recursão para calcular Fibonacci
-long long fibonacciRecursivo(int n);
+using namespace std;
 
-int algoritmo3() { 
+int recursaocaminhos(int i, int j, int linhas, int colunas, const vector<vector<int>>& matriz, vector<vector<int>> matrizcheck, 
+                        vector<pair<int, int>>& caminho_atual, vector<vector<pair<int, int>>>& todos_caminhos) {
     
+    caminho_atual.push_back({i, j});
+    matrizcheck[i][j] = true;
+    int total_caminhos = 0;
 
-    //Marca o tempo exato
-    auto inicio = std::chrono::high_resolution_clock::now();
-
-    //Calcular as 50 primeiras posições de fibonacci
-    for (int i = 0; i <= 49; i++) {
-        // O 'volatile' obriga a CPU a executar a conta em todos os ciclos
-        volatile long long resultado = fibonacciRecursivo(i);
-        resultado += 0;
+    if ((i == linhas - 1) && (j == colunas - 1)) {
+        todos_caminhos.push_back(caminho_atual);
+        
+        if (todos_caminhos.size() >= 500000) {
+            todos_caminhos.clear();
+            todos_caminhos.shrink_to_fit();
+        }
+        total_caminhos = 1;
+    } else {
+        if ((j >= 1) && (!matrizcheck[i][j - 1])) {
+            total_caminhos += recursaocaminhos(i, j - 1, linhas, colunas, matriz, matrizcheck, caminho_atual, todos_caminhos);
+        }
+        if ((j < colunas - 1) && (!matrizcheck[i][j + 1])) {
+            total_caminhos += recursaocaminhos(i, j + 1, linhas, colunas, matriz, matrizcheck, caminho_atual, todos_caminhos);
+        }
+        if ((i >= 1) && (!matrizcheck[i - 1][j])) {
+            total_caminhos += recursaocaminhos(i - 1, j, linhas, colunas, matriz, matrizcheck, caminho_atual, todos_caminhos);
+        }
+        if ((i < linhas - 1) && (!matrizcheck[i + 1][j])) {
+            total_caminhos += recursaocaminhos(i + 1, j, linhas, colunas, matriz, matrizcheck, caminho_atual, todos_caminhos);
+        }
     }
 
-    auto fim = std::chrono::high_resolution_clock::now();
+    caminho_atual.pop_back();
 
-    //Calcula a duração total e converte para milissegundos
-    auto tempo = std::chrono::duration_cast<std::chrono::milliseconds>(fim - inicio);
-    return tempo.count();
+    return total_caminhos;
 }
 
+int algoritmo3() {
+    int linhas = 7;
+    int colunas = 6;
 
-long long fibonacciRecursivo(int n) {
-    if (n <= 1) {
-        return n;
-    }
-    //chama para calcular os dois anteriores 
-    return fibonacciRecursivo(n - 1) + fibonacciRecursivo(n - 2);
+    vector<vector<int>> matriz(linhas, vector<int>(colunas, 0));
+    vector<vector<int>> matrizcheck(linhas, vector<int>(colunas, false));
+
+    vector<pair<int, int>> caminho_atual;
+    vector<vector<pair<int, int>>> todos_caminhos;
+
+    auto inicio = chrono::high_resolution_clock::now();
+
+    int caminhos = recursaocaminhos(0, 0, linhas, colunas, matriz, matrizcheck, caminho_atual, todos_caminhos);
+
+    auto fim = chrono::high_resolution_clock::now();
+
+    auto duracao_ms = chrono::duration_cast<chrono::milliseconds>(fim - inicio);
+    
+    return duracao_ms.count();
 }
 
 #endif

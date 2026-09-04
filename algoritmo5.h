@@ -1,6 +1,5 @@
-#include <iostream>
-#include <cmath>
-#include <chrono>
+#ifndef ALGORITMO_5
+#define ALGORITMO_5
 
 long double fat(int num){
     if (num <= 1){
@@ -10,7 +9,7 @@ long double fat(int num){
     }
 }
 
-int main(){
+int algoritmo5(){
     auto start = std::chrono::high_resolution_clock::now();
     long double result1, result2, result3, result4, result5, result6, result7, result8, result9;
     int i, j, k;
@@ -40,7 +39,7 @@ int main(){
     auto end = std::chrono::high_resolution_clock::now();
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << "Tempo de execução: " << duration.count() << " ms" << std::endl;
-
-    return 0;
+    return duration.count();
 }
+
+#endif
